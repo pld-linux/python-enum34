@@ -28,7 +28,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Python 3.4 introduced official support for enumerations. This is a
-backport of that feature to Python 3.3, 3.2, 3.1, 2.7, 2.5, 2.5, and
+backport of that feature to Python 3.3, 3.2, 3.1, 2.7, 2.6, 2.5, and
 2.4.
 
 An enumeration is a set of symbolic names (members) bound to unique,
@@ -46,7 +46,7 @@ Group:		Development/Libraries
 
 %description -n python3-enum34
 Python 3.4 introduced official support for enumerations. This is a
-backport of that feature to Python 3.3, 3.2, 3.1, 2.7, 2.5, 2.5, and
+backport of that feature to Python 3.3, 3.2, 3.1, 2.7, 2.6, 2.5, and
 2.4.
 
 An enumeration is a set of symbolic names (members) bound to unique,
