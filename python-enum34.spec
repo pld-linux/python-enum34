@@ -63,23 +63,19 @@ in an enumeration.
 
 %build
 %if %{with python2}
-%{__python} setup.py build --build-base build-2
+%py_build
 %{?with_tests:%{__python} enum/test_enum.py}
 %endif
 
 %if %{with python3}
-%{__python3} setup.py build --build-base build-3
+%py3_build
 %{?with_tests:%{__python3} enum/test_enum.py}
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
-%{__python} setup.py \
-	build --build-base build-2 \
-	install --skip-build \
-	--optimize=2 \
-	--root=$RPM_BUILD_ROOT
+%py_install
 
 rm -r $RPM_BUILD_ROOT%{py_sitescriptdir}/enum/{LICENSE,README,doc}
 rm -r $RPM_BUILD_ROOT%{py_sitescriptdir}/enum/test_*.py*
@@ -88,11 +84,7 @@ rm -r $RPM_BUILD_ROOT%{py_sitescriptdir}/enum/test_*.py*
 %endif
 
 %if %{with python3}
-%{__python3} setup.py \
-	build --build-base build-3 \
-	install --skip-build \
-	--optimize=2 \
-	--root=$RPM_BUILD_ROOT
+%py3_install
 
 rm -r $RPM_BUILD_ROOT%{py3_sitescriptdir}/enum/{LICENSE,README,doc}
 rm $RPM_BUILD_ROOT%{py3_sitescriptdir}/enum/test_enum.py
