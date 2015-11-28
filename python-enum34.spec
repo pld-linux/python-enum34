@@ -7,7 +7,7 @@
 Summary:	Backport of Python 3.4 Enum
 Name:		python-enum34
 Version:	1.0.4
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Libraries
 Source0:	https://pypi.python.org/packages/source/e/enum34/enum34-%{version}.tar.gz
