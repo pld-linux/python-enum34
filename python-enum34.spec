@@ -14,7 +14,7 @@ Source0:	https://pypi.python.org/packages/source/e/enum34/enum34-%{version}.tar.
 # Source0-md5:	ac80f432ac9373e7d162834b264034b6
 URL:		https://pypi.python.org/pypi/enum34
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	rpmbuild(macros) >= 1.710
 %if %{with python2}
 BuildRequires:	python
 BuildRequires:	python-setuptools
