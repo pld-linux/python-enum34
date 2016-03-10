@@ -5,23 +5,25 @@
 %bcond_with	python3 # CPython 3.x module (not needed for Python 3.4+)
 
 Summary:	Backport of Python 3.4 Enum
+Summary(pl.UTF-8):	Backport klasy Enum z Pythona 3.4
 Name:		python-enum34
-Version:	1.0.4
-Release:	3
+Version:	1.1.2
+Release:	1
 License:	BSD
-Group:		Development/Libraries
+Group:		Libraries/Python
+#Source0Download: https://pypi.python.org/simple/enum34/
 Source0:	https://pypi.python.org/packages/source/e/enum34/enum34-%{version}.tar.gz
-# Source0-md5:	ac80f432ac9373e7d162834b264034b6
+# Source0-md5:	025bb71b3f9d2fad15d0ee53e48dc873
 URL:		https://pypi.python.org/pypi/enum34
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.710
+BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with python2}
-BuildRequires:	python
-BuildRequires:	python-setuptools
+BuildRequires:	python >= 1:2.4
+BuildRequires:	python-modules >= 1:2.4
 %endif
 %if %{with python3}
-BuildRequires:	python3
-BuildRequires:	python3-setuptools
+BuildRequires:	python3 >= 1:3.2
+BuildRequires:	python3-modules >= 1:3.2
 %endif
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -40,9 +42,25 @@ unique sets of names and values: Enum and IntEnum. It also defines one
 decorator, unique, that ensures only unique member names are present
 in an enumeration.
 
+%description -l pl.UTF-8
+Python wraz z wersją 3.4 wprowadził obsługę typów wyliczeniowych. Ten
+pakiet to backport tego elementu języka do Pythona 3.3, 3.2, 3.2, 2.7,
+2.6, 2.5 oraz 2.4.
+
+Typ wyliczeniowy to zbiór nazw symbolicznych (elementów) ograniczonych
+do unikatowych, stałych wartości. Wewnątrz typu wyliczeniowego jego
+elementy można porównywać pod kątem identyczności oraz iterować po
+nich.
+
+Moduł definiuje dwie klasy wyliczeniowe, których można używać do
+definiowania unikatowych zbiorów nazw i wartości: Enum oraz IntEnum.
+Definiuje także jeden dekorator (unique), zapewniający obecność
+wyłącznie unikatowych nazw elementów w typie wyliczeniowym.
+
 %package -n python3-enum34
 Summary:	Backport of Python 3.4 Enum
-Group:		Development/Libraries
+Summary(pl.UTF-8):	Backport klasy Enum z Pythona 3.4
+Group:		Libraries/Python
 
 %description -n python3-enum34
 Python 3.4 introduced official support for enumerations. This is a
@@ -58,18 +76,37 @@ unique sets of names and values: Enum and IntEnum. It also defines one
 decorator, unique, that ensures only unique member names are present
 in an enumeration.
 
+%description -n python3-enum34 -l pl.UTF-8
+Python wraz z wersją 3.4 wprowadził obsługę typów wyliczeniowych. Ten
+pakiet to backport tego elementu języka do Pythona 3.3, 3.2, 3.2, 2.7,
+2.6, 2.5 oraz 2.4.
+
+Typ wyliczeniowy to zbiór nazw symbolicznych (elementów) ograniczonych
+do unikatowych, stałych wartości. Wewnątrz typu wyliczeniowego jego
+elementy można porównywać pod kątem identyczności oraz iterować po
+nich.
+
+Moduł definiuje dwie klasy wyliczeniowe, których można używać do
+definiowania unikatowych zbiorów nazw i wartości: Enum oraz IntEnum.
+Definiuje także jeden dekorator (unique), zapewniający obecność
+wyłącznie unikatowych nazw elementów w typie wyliczeniowym.
+
 %prep
 %setup -q -n enum34-%{version}
 
 %build
 %if %{with python2}
 %py_build
-%{?with_tests:%{__python} enum/test_enum.py}
+cd build-2
+%{?with_tests:PYTHONPATH=lib %{__python} lib/enum/test_enum.py}
+cd ..
 %endif
 
 %if %{with python3}
 %py3_build
-%{?with_tests:%{__python3} enum/test_enum.py}
+cd build-3
+%{?with_tests:PYTHONPATH=lib %{__python3} lib/enum/test_enum.py}
+cd ..
 %endif
 
 %install
@@ -77,8 +114,8 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %py_install
 
-rm -r $RPM_BUILD_ROOT%{py_sitescriptdir}/enum/{LICENSE,README,doc}
-rm -r $RPM_BUILD_ROOT%{py_sitescriptdir}/enum/test_*.py*
+%{__rm} -r $RPM_BUILD_ROOT%{py_sitescriptdir}/enum/{LICENSE,README,doc}
+%{__rm} -r $RPM_BUILD_ROOT%{py_sitescriptdir}/enum/test_*.py*
 
 %py_postclean
 %endif
@@ -86,8 +123,8 @@ rm -r $RPM_BUILD_ROOT%{py_sitescriptdir}/enum/test_*.py*
 %if %{with python3}
 %py3_install
 
-rm -r $RPM_BUILD_ROOT%{py3_sitescriptdir}/enum/{LICENSE,README,doc}
-rm $RPM_BUILD_ROOT%{py3_sitescriptdir}/enum/test_enum.py
+%{__rm} -r $RPM_BUILD_ROOT%{py3_sitescriptdir}/enum/{LICENSE,README,doc}
+%{__rm} $RPM_BUILD_ROOT%{py3_sitescriptdir}/enum/test_enum.py
 %endif
 
 
@@ -97,7 +134,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %files
 %defattr(644,root,root,755)
-%doc PKG-INFO enum/LICENSE enum/README enum/doc/enum.rst
+%doc enum/LICENSE enum/README enum/doc/enum.rst
 %dir %{py_sitescriptdir}/enum
 %{py_sitescriptdir}/enum/*.py[co]
 %{py_sitescriptdir}/enum34-%{version}-py*.egg-info
@@ -106,7 +143,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python3}
 %files -n python3-enum34
 %defattr(644,root,root,755)
-%doc PKG-INFO enum/LICENSE enum/README enum/doc/enum.rst
+%doc enum/LICENSE enum/README enum/doc/enum.rst
 %{py3_sitescriptdir}/enum/*.py
 %{py3_sitescriptdir}/enum/__pycache__
 %{py3_sitescriptdir}/enum34-%{version}-py*.egg-info
