@@ -11,10 +11,10 @@ Version:	1.1.6
 Release:	2
 License:	BSD
 Group:		Libraries/Python
-#Source0Download: https://pypi.python.org/simple/enum34/
-Source0:	https://pypi.python.org/packages/bf/3e/31d502c25302814a7c2f1d3959d2a3b3f78e509002ba91aea64993936876/enum34-%{version}.tar.gz
+#Source0Download: https://pypi.org/simple/enum34/
+Source0:	https://files.pythonhosted.org/packages/source/e/enum34/enum34-%{version}.tar.gz
 # Source0-md5:	5f13a0841a61f7fc295c514490d120d0
-URL:		https://pypi.python.org/pypi/enum34
+URL:		https://pypi.org/project/enum34/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with python2}
