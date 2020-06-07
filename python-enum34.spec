@@ -7,13 +7,13 @@
 Summary:	Backport of Python 3.4 Enum
 Summary(pl.UTF-8):	Backport klasy Enum z Pythona 3.4
 Name:		python-enum34
-Version:	1.1.6
-Release:	2
+Version:	1.1.10
+Release:	1
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/enum34/
 Source0:	https://files.pythonhosted.org/packages/source/e/enum34/enum34-%{version}.tar.gz
-# Source0-md5:	5f13a0841a61f7fc295c514490d120d0
+# Source0-md5:	b5ac0bb5ea9e830029599e410d09d3b5
 URL:		https://pypi.org/project/enum34/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
