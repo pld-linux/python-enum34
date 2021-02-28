@@ -8,7 +8,7 @@ Summary:	Backport of Python 3.4 Enum
 Summary(pl.UTF-8):	Backport klasy Enum z Pythona 3.4
 Name:		python-enum34
 Version:	1.1.10
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/enum34/
